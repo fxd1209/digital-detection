@@ -1,0 +1,2 @@
+#常量池
+MENU_FILE_ITME_OPEN=2

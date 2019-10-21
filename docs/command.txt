@@ -1,0 +1,24 @@
+# pipreqs与requirements的使用
+    """1.pipreqs是安装引入包的，requirements是存放引入包以及版本的。
+       2.pip工具安装pipreqs:
+            pip install pipreqs
+       3:pipreqs生成项目(只生成项目使用的)使用的包文件,进入项目根目录，使用命令:
+            pipreqs ./ --encoding=utf8
+         不进入根目录 将./换成项目路径即可
+       4:pipreqs导入requirements包文件,进入requirements路径:
+            pip install -r requirements.txt
+    """
+
+# setuptools的使用
+    """1.setuptools是打包安装，发布工具
+       2.pip工具安装 setuptools:
+            pip install setuptools
+       3.setuptools 打包(配置见 setup.py):
+            cd 根目录
+            python setup.py bdist_egg(其他参数自行查看)
+            (包导入请自行查看)
+       4.安装：
+            python setup.py install
+            会被安装到 python 中的scrips中，路径设置待定
+    """
+
