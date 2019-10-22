@@ -3,7 +3,11 @@
 #-*- coding:utf-8 -*-
 
 def main():
-    print('hello')
+    print()
+    gfhgf
+
+
+
     print("This is a demo package!")
     a=input("请输入:")
 

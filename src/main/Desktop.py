@@ -79,42 +79,134 @@ def Onclick(self,event):
 
 import wx
 import os
+from PIL import Image
 from src.main.util import CST
+from src.main.util.CST import URL
 
 
 
 class MainWin(wx.Frame):
     def __init__(self,*args,**kw):
-        super(MainWin,self).__init__(*args,**kw)
-
-        self.initWin()
-
-    def initWin(self):
-        #创建菜单栏(MenuBar),在菜单栏里面添加菜单(Menu),在菜单里面加菜单项（menuItem）
-        menuBar=wx.MenuBar()                #菜单栏
-        menu_file=wx.Menu()                 #菜单栏中一文件菜单
+        super(MainWin,self).__init__(style=wx.DEFAULT_FRAME_STYLE ^ wx.RESIZE_BORDER ^ wx.MAXIMIZE_BOX,*args,**kw)
+        # 创建菜单栏(MenuBar),在菜单栏里面添加菜单(Menu),在菜单里面加菜单项（menuItem）
+        self.menuBar = wx.MenuBar()  # 菜单栏
+        self.menu_file = wx.Menu()  # 菜单栏中一文件菜单
         # menuBar,parentMenu,itemId,itemName,itemBgUrl,EVENT_MENU,fun
-        self.createAndBindMenuItem(menuBar, menu_file, CST.MENU_FILE_ITME_OPEN, "open image", "", wx.EVT_MENU, self.OnOpenFile)
-        self.createAndBindMenuItem(menuBar, menu_file, CST.MENU_FILE_ITME_OPEN, "open images", "", wx.EVT_MENU, self.OnOpenFile)
-        self.createAndBindMenuItem(menuBar, menu_file, CST.MENU_FILE_ITME_OPEN, "打开文件", "", wx.EVT_MENU, self.OnOpenFile)
-        menuBar.Append(menu_file, '&File')
+        self.createAndBindMenuItem(self.menuBar, self.menu_file, CST.MENU_FILE_ITME_OPEN, "open image", "", wx.EVT_MENU,
+                                   self.OnOpenFile)
+        self.createAndBindMenuItem(self.menuBar, self.menu_file, CST.MENU_FILE_ITME_OPEN, "open images", "", wx.EVT_MENU,
+                                   self.OnOpenFile)
+        self.createAndBindMenuItem(self.menuBar, self.menu_file, CST.MENU_FILE_ITME_OPEN, "打开文件", "", wx.EVT_MENU,
+                                   self.OnOpenFile)
+        self.menuBar.Append(self.menu_file, '&File')
+
+        self.sizer = wx.GridBagSizer(0, 0)  # 列间隔，行间隔都为5
+
+        """
+        #panel top Start
+        """
+        self.panelTop = wx.Panel(self)
+        self.panelTop.SetMinSize((1120, 30))
+
+        # 在Panel上添加Button
+        self.btnReadFile = wx.Button(self.panelTop, id=CST.BTN_READ_FILE, label=u'读取', pos=(400, 0), size=(70, 30))
+        self.btnReadFile.SetDefault()
+        self.btnReadFile.SetBitmap(bitmap=wx.Bitmap(URL.getResPath("images/logo/import.gif")))
+        self.btnReadFile.Bind(wx.EVT_LEFT_DOWN,self.OnOpenFile)
+
+        # 在Panel上添加Button
+        self.btnOcr = wx.Button(self.panelTop, id=CST.BTN_OCR_IMG,label=u"识别", pos=(470, 0), size=(70, 30))
+        self.btnOcr.SetDefault()
+        self.btnOcr.SetBitmap(bitmap=wx.Bitmap(URL.getResPath("images/logo/identify.gif")))
+        self.btnOcr.Bind(wx.EVT_LEFT_DOWN, self.OnOpenFile)
 
 
+        # 在Panel上添加Button
+        self.btnExport = wx.Button(self.panelTop, id=CST.BTN_EXPORT_EXCEL, label=u'导出Excel', pos=(540, 0), size=(70, 30))
+        self.btnExport.SetDefault()
+        self.btnExport.SetBitmap(bitmap=wx.Bitmap(URL.getResPath("images/logo/excel.gif")))
+        self.btnExport.Bind(wx.EVT_LEFT_DOWN, self.OnOpenFile)
 
 
-        self.SetMenuBar(menuBar)
+        """
+         #panel left Start
+        """
+        self.panelLeft = wx.Panel(self)
+        self.panelLeft.SetMinSize((900,356))
+
+
+        """
+        #panel right Start
+        """
+        self.panelRight = wx.Panel(self)
+        self.panelRight.SetMinSize((220, 356))
+
+        """
+        #panel bottom Start
+        """
+        self.panelBottom = wx.Panel(self)
+        self.panelBottom.SetMinSize((1120, 170))
+
+        # 在第0行第0列，添加一个控件，占1行和10列的空间，wx.EXPAND表示控件扩展至填满整个“格子”的空间
+        self.sizer.Add(self.panelTop,pos=(0, 0),span=(1, 10),flag=wx.EXPAND | wx.ALL,border=0)
+        self.sizer.Add(self.panelLeft, pos=(1, 0), span=(2, 7), flag=wx.EXPAND | wx.ALL, border=1)
+        self.sizer.Add(self.panelRight, pos=(1, 7), span=(2, 3), flag=wx.EXPAND | wx.ALL, border=1)
+        self.sizer.Add(self.panelBottom, pos=(3, 0), span=(1, 10), flag=wx.EXPAND | wx.ALL, border=1)
+
+        self.SetSizerAndFit(self.sizer)
+        self.SetMenuBar(self.menuBar)
         self.SetSize((1120, 560))
         self.SetTitle('数字识别')
         self.Centre()
 
+        self.PanelW, self.PanelH = self.panelLeft.GetSize()  # 展示图片区域的宽高，以留着展示图片用
+        self.ImgW, self.ImgH = (0,0)
+        print(self.ImgW, self.ImgH)
+        self.ImgX,self.ImgY=0,0
+        self.ImgBit=""
+        self.setShowImage(self.panelLeft,"images/logo/ocr_bg.jpg")
 
-    def OnOpenFile(self, e):
+
+    def setShowImage(self,parent,url):
+        parent.DestroyChildren() #抹掉原先显示的图片
+        imgW,imgH=self.ImgW,self.ImgH
+        image=Image.open(URL.getResPath(url))
+
+        self.ImgW, self.ImgH = image.size
+        if self.ImgH>self.PanelH:  #按照比例进行缩小
+            ratio=self.ImgH/self.ImgW #原比例
+            self.ImgH=self.PanelH-4  #使得高一定小于展示panel
+            self.ImgW=self.ImgH/ratio
+
+        #图片位置居中
+        self.ImgX = self.PanelW / 2 - self.ImgW / 2
+        self.ImgY = self.PanelH / 2 - self.ImgH / 2
+
+        #重置图片大小
+        if URL.getFileTypeByUrl(url)==".jpg" or URL.getFileTypeByUrl(url)==".jpeg":
+            image = wx.Image(URL.getResPath(url),wx.BITMAP_TYPE_JPEG)
+        elif URL.getFileTypeByUrl(url)==".png":
+            image = wx.Image(URL.getResPath(url), wx.BITMAP_TYPE_PNG)
+        image = image.Rescale(self.ImgW, self.ImgH)
+        self.ImgBit = image.ConvertToBitmap()
+        # 通过计算获得图片的存放位置
+        self.bitmapButton = wx.BitmapButton(parent, -1,self.ImgBit, pos=(self.ImgX, self.ImgY),size=(self.ImgW,self.ImgH))
+
+
+    def initWin(self):
+        pass
+
+    def OnClick(self,e):
+        print("你好")
+
+    def OnOpenFile(self,e):
         wildcard = 'All files(*.*)|*.*'
         """
         FileDialog(parent, message=FileSelectorPromptStr, defaultDir=EmptyString, defaultFile=EmptyString,
                    wildcard=FileSelectorDefaultWildcardStr, style=FD_DEFAULT_STYLE, pos=DefaultPosition,
                    size=DefaultSize, name=FileDialogNameStr)
         """
+        print("进入打开文件函数")
         dialog = wx.FileDialog(None,message= '选择图片', defaultDir=os.getcwd(), defaultFile='', wildcard=wildcard)
         if dialog.ShowModal() == wx.ID_OK:
            # self.FileName.SetValue(dialog.GetPath())
