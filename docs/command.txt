@@ -8,6 +8,7 @@
        4:pipreqs导入requirements包文件,进入requirements路径:
             pip install -r requirements.txt
     """
+    包管理
 
 # setuptools的使用
     """1.setuptools是打包安装，发布工具
