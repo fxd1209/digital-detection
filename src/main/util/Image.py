@@ -34,7 +34,7 @@ def readPicture(file):
     # plt.show()
     return  img
 
-##输出目录下全部图片矩阵至'data.csv'，
+##输出目录下全部图片矩阵至'data.csv'， Ok
 #dir为绝对路径，如"F:\\abc"，classify为True则以文件名对图片分类
 # 大小为N*(28*28+1),
 # 第一列为每行的类别，为1则代表该图片数字值为1，若classify为false则第一列为-1
@@ -58,7 +58,7 @@ def appendCsvFileByDirectry(dir,classify):
     csv.writer(csvfile,delimiter=',').writerows(Pictures)
     csvfile.close()
 
-##输出指定文件图片矩阵至'data.csv'，
+##输出指定文件图片矩阵至'data.csv'，OK
 #filename为绝对路径，如"F:\\7.png"，classify为True则以文件名对图片分类
 # 大小为N*(28*28+1),
 # 第一列为每行的类别，为1则代表该图片数字值为1，若classify为false则第一列为-1
