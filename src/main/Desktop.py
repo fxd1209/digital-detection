@@ -95,10 +95,10 @@ class MainWin(wx.Frame):
         self.fileNamePath={}     #名字-路径键值对  同一路径下不可能有重复名字，故以名字作为key
         #top，left, right1Title, right1, right2Title, right2, bottomTitle, bottom
         self.skinList=[
-                       [(230,230,250),(245,247,251),(240,255,255),(240,255,255),(230,230,250),(240,255,255),(233,0,1),(233,0,1)],   # skin1
-                       [(176,118,222),(245,247,251),(30,30,30),(245,246,248),(30,30,30),(245,246,248),(176,118,222),(176,118,222)],   # skin2
-                       [(37,38,43),(245,247,251),(30,30,30),(245,246,248),(30,30,30),(245,246,248),(37,38,43),(37,38,43)],   # skin3
-                       [(244,206,205),(245,247,251),(251,244,14),(245,246,248),(30,30,30),(245,246,248),(244,206,205),(244,206,205)]    # skin4
+                       [(255,63,30),(245,247,251),(255,63,30),(240,255,255),(255,63,30),(240,255,255),(255,63,30),(255,63,30)],   # skin1
+                       [(196,147,239),(245,247,251),(196,147,239),(245,246,248),(196,147,239),(245,246,248),(196,147,239),(196,147,239)],   # skin2
+                       [(234,187,19),(245,247,251),(234,187,19),(245,246,248),(234,187,19),(245,246,248),(234,187,19),(234,187,19)],   # skin3
+                       [(244,206,205),(245,247,251),(244,206,205),(245,246,248),(244,206,205),(245,246,248),(244,206,205),(244,206,205)]    # skin4
                        ]
 
 
@@ -206,7 +206,7 @@ class MainWin(wx.Frame):
                                        self.OnChangeSkin)
         self.createAndBindSkinMenuItem(self.menuBar, self.menu_skin, CST.MENU_SKIN_ITME_TWO, "基佬紫", "", wx.EVT_MENU,
                                        self.OnChangeSkin)
-        self.createAndBindSkinMenuItem(self.menuBar, self.menu_skin, CST.MENU_SKIN_ITME_THREE, "暗黑秋夜", "", wx.EVT_MENU,
+        self.createAndBindSkinMenuItem(self.menuBar, self.menu_skin, CST.MENU_SKIN_ITME_THREE, "金色稻田", "", wx.EVT_MENU,
                                        self.OnChangeSkin)
         self.createAndBindSkinMenuItem(self.menuBar, self.menu_skin, CST.MENU_SKIN_ITME_FOUR, "粉红女郎", "", wx.EVT_MENU,
                                        self.OnChangeSkin)
