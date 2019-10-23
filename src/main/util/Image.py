@@ -1,5 +1,5 @@
 import os
-from skimage import io
+from skimage import io,filters
 import numpy as np
 import csv
 from matplotlib import pyplot as plt
@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 #图片矩阵大小
 N=28
 #灰度阈值
-color=170/255
+# color=170/255
 
 ##读取图片  ok
 #file为绝对路径,比如：'F:\\2.png'
@@ -20,9 +20,12 @@ def readPicture(file):
 
     #二值化图片
     img=io.imread(file,as_gray=True)
+    #otsu算法自动计算阈值
+    color=filters.threshold_otsu(img)
     for i in range(0, img.shape[0]):
         for j in range(0,img.shape[1]):
             img[i][j]=0 if img[i][j] > color else 1
+
     #切割图片
     img,size=cutImg(img)
     #无可切割点（无像素）则返回-1
@@ -113,7 +116,7 @@ def ratioImg(img):
             for j in range(0,width):
                 squareImg[i][j+int(np.floor((height-width)/2))]=img[i][j]
     #若高<宽
-    if width>height:
+    if width>=height:
         squareImg = np.zeros(width * width).reshape(width, width)  # 方形图片
         for i in range(0, height):
             for j in range(0, width):

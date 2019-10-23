@@ -95,10 +95,10 @@ class MainWin(wx.Frame):
         self.fileNamePath={}     #名字-路径键值对  同一路径下不可能有重复名字，故以名字作为key
         #top，left, right1Title, right1, right2Title, right2, bottomTitle, bottom
         self.skinList=[
-                       [(230,230,250),(248,248,255),(240,255,255),(	240,255,255),(230,230,250),(),(),()],   # skin1
-                       [(),(),(),(),(),(),(),()],   # skin2
-                       [(),(),(),(),(),(),(),()],   # skin3
-                       [(),(),(),(),(),(),(),()]    # skin4
+                       [(230,230,250),(245,247,251),(240,255,255),(240,255,255),(230,230,250),(240,255,255),(233,0,1),(233,0,1)],   # skin1
+                       [(176,118,222),(245,247,251),(30,30,30),(245,246,248),(30,30,30),(245,246,248),(176,118,222),(176,118,222)],   # skin2
+                       [(37,38,43),(245,247,251),(30,30,30),(245,246,248),(30,30,30),(245,246,248),(37,38,43),(37,38,43)],   # skin3
+                       [(244,206,205),(245,247,251),(251,244,14),(245,246,248),(30,30,30),(245,246,248),(244,206,205),(244,206,205)]    # skin4
                        ]
 
 
@@ -346,7 +346,7 @@ class MainWin(wx.Frame):
         self.nameListBox.SetBackgroundColour(self.skinList[n][4])
         self.panelRight2.SetBackgroundColour(self.skinList[n][5])
         self.panelRight2Title.SetBackgroundColour(self.skinList[n][6])
-        self.panelBottom.SetBackgroundColour(self.skinList[n][8])
+        self.panelBottom.SetBackgroundColour(self.skinList[n][7])
         self.panelTop.Refresh()
         self.panelLeft.Refresh()
         self.panelRight1.Refresh()
