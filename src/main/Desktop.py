@@ -149,7 +149,7 @@ class MainWin(wx.Frame):
         """
         self.panelRight1 = wx.Panel(self)
         self.panelRight1.SetMinSize((220, 178))
-        self.panelRight1Title=wx.StaticText(self.panelRight1,-1,pos=(0,0),size=(220,20),label="文件列表")
+        wx.StaticText(self.panelRight1,-1,pos=(0,0),size=(220,20),label="文件列表")
         self.nameListBox = wx.ListBox(self.panelRight1, -1,pos=(0,20),size=(220,158),choices=list(self.fileNamePath.keys()), style=wx.LB_SINGLE,name=u"测试")  # wx.LB_SINGLE只能选择单个
         # 添加事件处理
         self.Bind(wx.EVT_LISTBOX, self.onClickNameListBox,self.nameListBox)
@@ -157,7 +157,7 @@ class MainWin(wx.Frame):
 
         self.panelRight2 = wx.Panel(self)
         self.panelRight2.SetMinSize((220, 178))
-        self.panelRight2Title=wx.StaticText(self.panelRight2, -1, pos=(0, 0), size=(220, 158),label="文件信息")
+        wx.StaticText(self.panelRight2, -1, pos=(0, 0), size=(220, 158),label="文件信息")
         # parent=None, id=None, label=None, pos=None, size=None, style=0, name=None
         self.fileInfo=wx.StaticText(self.panelRight2,-1,pos=(0,20),size=(220,158))
         self.setFileInfoText(self.nameListBox,self.fileInfo)
@@ -168,6 +168,10 @@ class MainWin(wx.Frame):
         """
         self.panelBottom = wx.Panel(self)
         self.panelBottom.SetMinSize((1120, 170))
+        wx.StaticText(self.panelBottom, -1, pos=(0, 0), size=(1120, 20), label="识别结果")
+        # parent=None, id=None, label=None, pos=None, size=None, style=0, name=None
+        self.ocrresult = wx.StaticText(self.panelBottom, -1, pos=(0, 20), size=(1120, 150))
+        #self.ocrresult(self.nameListBox, self.fileInfo)
 
         # 在第0行第0列，添加一个控件，占1行和10列的空间，wx.EXPAND表示控件扩展至填满整个“格子”的空间
         self.sizer.Add(self.panelTop,pos=(0, 0),span=(1, 10),flag=wx.EXPAND | wx.ALL,border=0)
@@ -343,17 +347,18 @@ class MainWin(wx.Frame):
         self.panelLeft.SetBackgroundColour(self.skinList[n][1])
         self.panelRight1.SetBackgroundColour(self.skinList[n][2])   #Right1的title  设置RightPanel的背景，然后用ListBox的颜色来覆盖
         self.nameListBox.SetBackgroundColour(self.skinList[n][3])
-        self.nameListBox.SetBackgroundColour(self.skinList[n][4])
-        self.panelRight2.SetBackgroundColour(self.skinList[n][5])
-        self.panelRight2Title.SetBackgroundColour(self.skinList[n][6])
-        self.panelBottom.SetBackgroundColour(self.skinList[n][7])
+        self.panelRight2.SetBackgroundColour(self.skinList[n][4])   #Right2的title
+        self.fileInfo.SetBackgroundColour(self.skinList[n][5])
+        self.panelBottom.SetBackgroundColour(self.skinList[n][6])    #bottom的title
+        self.ocrresult.SetBackgroundColour(self.skinList[n][7])
         self.panelTop.Refresh()
         self.panelLeft.Refresh()
         self.panelRight1.Refresh()
-        self.panelRight1Title.Refresh()
+        self.nameListBox.Refresh()
         self.panelRight2.Refresh()
-        self.panelRight2Title.Refresh()
+        self.fileInfo.Refresh()
         self.panelBottom.Refresh()
+        self.ocrresult.Refresh()
 
     def OnChangeSkin(self,event):
         id=event.GetId()
