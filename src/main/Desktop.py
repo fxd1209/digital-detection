@@ -149,7 +149,7 @@ class MainWin(wx.Frame):
         """
         self.panelRight1 = wx.Panel(self)
         self.panelRight1.SetMinSize((220, 178))
-        wx.StaticText(self.panelRight1,-1,pos=(0,0),size=(220,20),label="文件列表")
+        self.panelRight1Title=wx.StaticText(self.panelRight1,-1,pos=(0,0),size=(220,20),label="文件列表")
         self.nameListBox = wx.ListBox(self.panelRight1, -1,pos=(0,20),size=(220,158),choices=list(self.fileNamePath.keys()), style=wx.LB_SINGLE,name=u"测试")  # wx.LB_SINGLE只能选择单个
         # 添加事件处理
         self.Bind(wx.EVT_LISTBOX, self.onClickNameListBox,self.nameListBox)
@@ -157,7 +157,7 @@ class MainWin(wx.Frame):
 
         self.panelRight2 = wx.Panel(self)
         self.panelRight2.SetMinSize((220, 178))
-        wx.StaticText(self.panelRight2, -1, pos=(0, 0), size=(220, 158),label="文件信息")
+        self.panelRight2Title=wx.StaticText(self.panelRight2, -1, pos=(0, 0), size=(220, 158),label="文件信息")
         # parent=None, id=None, label=None, pos=None, size=None, style=0, name=None
         self.fileInfo=wx.StaticText(self.panelRight2,-1,pos=(0,20),size=(220,158))
         self.setFileInfoText(self.nameListBox,self.fileInfo)
@@ -342,13 +342,17 @@ class MainWin(wx.Frame):
         self.panelTop.SetBackgroundColour(self.skinList[n][0])
         self.panelLeft.SetBackgroundColour(self.skinList[n][1])
         self.panelRight1.SetBackgroundColour(self.skinList[n][2])
-        self.nameListBox.SetBackgroundColour(self.skinList[n][2])
-        self.panelRight2.SetBackgroundColour(self.skinList[n][3])
-        self.panelBottom.SetBackgroundColour(self.skinList[n][4])
+        self.panelRight1Title.SetBackgroundColour(self.skinList[n][3])
+        self.nameListBox.SetBackgroundColour(self.skinList[n][4])
+        self.panelRight2.SetBackgroundColour(self.skinList[n][5])
+        self.panelRight2Title.SetBackgroundColour(self.skinList[n][6])
+        self.panelBottom.SetBackgroundColour(self.skinList[n][8])
         self.panelTop.Refresh()
         self.panelLeft.Refresh()
         self.panelRight1.Refresh()
+        self.panelRight1Title.Refresh()
         self.panelRight2.Refresh()
+        self.panelRight2Title.Refresh()
         self.panelBottom.Refresh()
 
     def OnChangeSkin(self,event):
