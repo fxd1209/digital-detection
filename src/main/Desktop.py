@@ -341,8 +341,8 @@ class MainWin(wx.Frame):
     def setSkin(self,skinList,n):
         self.panelTop.SetBackgroundColour(self.skinList[n][0])
         self.panelLeft.SetBackgroundColour(self.skinList[n][1])
-        self.panelRight1.SetBackgroundColour(self.skinList[n][2])
-        self.panelRight1Title.SetBackgroundColour(self.skinList[n][3])
+        self.panelRight1.SetBackgroundColour(self.skinList[n][2])   #Right1的title  设置RightPanel的背景，然后用ListBox的颜色来覆盖
+        self.nameListBox.SetBackgroundColour(self.skinList[n][3])
         self.nameListBox.SetBackgroundColour(self.skinList[n][4])
         self.panelRight2.SetBackgroundColour(self.skinList[n][5])
         self.panelRight2Title.SetBackgroundColour(self.skinList[n][6])
