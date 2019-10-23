@@ -365,7 +365,7 @@ class MainWin(wx.Frame):
         if   id==CST.MENU_SKIN_ITME_ONE:
             self.setSkin(self.skinList,0)
         elif id==CST.MENU_SKIN_ITME_TWO:
-            self.setSkin(self.skinList, 0)
+            self.setSkin(self.skinList, 1)
         elif id==CST.MENU_SKIN_ITME_THREE:
             self.setSkin(self.skinList, 2)
         elif id==CST.MENU_SKIN_ITME_FOUR:
