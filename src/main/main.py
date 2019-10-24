@@ -14,9 +14,10 @@ def main():
     t1=time.time()
     url=URL.getResPath("images/test/2.png")
                     #56 隐藏层的感知器个数      50000是sample(样本)的个数   5是迭代的次数
-    ann, test_data = A.train(A.create_ann(56), 100, 2)
    # joblib.dump(ann,"ann.m")
     #ann=joblib.load("ann.m")
+
+    ann, test_data = A.train(A.create_ann(500), 50000, 5)
     #A.test(ann,test_data)
     img=cv2.imread(url, cv2.IMREAD_UNCHANGED)
     img, imgbinary, rectList=ImgProcess.imgProcess(img)
