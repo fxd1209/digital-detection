@@ -12,10 +12,9 @@ def loadData(url):
   trainRar = gzip.open(URL.getResPath("data/train_data.gz"), 'rb')
   #train_data是一个元组 第一个元组是一个二维数组，其中每一行为一张图片的一为存储，第二个元组为对应的结果值
   train_data, class_data, test_data = pickle.load(trainRar,encoding='bytes')
-  list=[]
-  print(len(train_data[1]))
-  for i in range(15):
-    list.append(train_data[0][i].reshape(28, 28))
+  # list=[]
+  # for i in range(15):
+  #   list.append(train_data[0][i].reshape(28, 28))
   # cv2.imshow(u"训练集部分图片预览", np.hstack(list))
   # cv2.waitKey()
   trainRar.close()
@@ -66,7 +65,7 @@ def create_ann(hidden = 20):
   maxCount是迭代的最大次数，
   epsilon是特定的阈值
   """
-  ann.setTermCriteria((cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 100, 5))
+  ann.setTermCriteria((cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 100, 1))
   return ann
 
 #ann,样本数量,迭代次数
@@ -79,7 +78,7 @@ def train(ann, samples = 10000, times = 1):
       if (counter > samples):
         print("内层")
         break
-      if (counter % 1000 == 0):
+      if (counter % 500 == 0):
         print("迭代次数 %d: 已完成 %d/%d" % (x+1, counter, samples))
       counter += 1
       data, digit = img #压缩的时候，是把图片矩阵和结果映射打包为元组的
@@ -105,6 +104,14 @@ def predict(ann, sample):
   if (rows != 28 or cols != 28) and rows * cols > 0:
     data = cv2.resize(data, (28, 28), interpolation = cv2.INTER_LINEAR)
   return ann.predict(np.array([data.ravel()], dtype=np.float32))
+
+
+def predictSklearn(clf, sample):
+  data = sample.copy()
+  rows, cols = data.shape
+  if (rows != 28 or cols != 28) and rows * cols > 0:
+    data = cv2.resize(data, (28, 28), interpolation = cv2.INTER_LINEAR)
+  return clf.predict(np.array([data.ravel()], dtype=np.float32))
 
 """
 ann, test_data = train(create_ANN())

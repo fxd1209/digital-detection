@@ -5,6 +5,7 @@ from PIL import Image
 #常量池
 MENU_FILE_ITME_OPEN=2  #open image
 MENU_FILE_ITME_OPENS=3  #open images
+MENU_FILE_ITME_EXIT=4  #open images
 
 MENU_SKIN_ITME_ONE=5
 MENU_SKIN_ITME_TWO=6
@@ -22,6 +23,7 @@ BTN_OCR_IMG=11
 BTN_EXPORT_EXCEL=12
 BTN_BITMAP_SHOW=13
 BTN_OCR_TRAIN=14
+BTN_IMG_PRO=15  #处理图片
 
 class URL:
     @staticmethod

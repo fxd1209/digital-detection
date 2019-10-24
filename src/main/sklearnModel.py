@@ -19,7 +19,6 @@ img = cv2.imread(url, cv2.IMREAD_UNCHANGED)
 img, imgbinary, rectList = ImgProcess.imgProcess(img)
 
 
-
 # 加载数据
 # mnist = fetch_mldata("MNIST original")
 url=URL.getResPath("data/train_data.gz")
@@ -45,7 +44,9 @@ mlp = MLPClassifier(solver='sgd', activation='relu',alpha=1e-4,hidden_layer_size
 # 使用solver='sgd'，准确率为98%，且每次训练都会分batch，消耗更小的内存
 
 # 训练模型
+print("训练start")
 mlp.fit(x_training_data_final, y_training_data_final)
+print("训练完成")
 #srcimg,processimg,rectList,model
 resultImg,processimg,resultList=ImgProcess.imgSklearnPredicted(img,imgbinary,rectList,mlp)
 cv2.imshow("re", resultImg)
@@ -55,10 +56,10 @@ print(resultList)
 cv2.waitKey()
 #mlp.predict()
 # 查看模型结果
-print(mlp.score(x_test_data,y_test_data))
-print(mlp.n_layers_)
-print(mlp.n_iter_)
-print(mlp.loss_)
+print(mlp.score(x_test_data,y_test_data))  #0.971
+print(mlp.n_layers_) #4
+print(mlp.n_iter_)   #10  迭代次数
+print(mlp.loss_)     #0.03失误
 print(mlp.out_activation_)
 # Iteration 1, loss = 0.31452262
 # Iteration 2, loss = 0.13094946
