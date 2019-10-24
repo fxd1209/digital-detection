@@ -122,16 +122,17 @@ class MainWin(wx.Frame):
         self.btnReadFile.SetDefault()
         self.btnReadFile.SetBitmap(bitmap=wx.Bitmap(URL.getResPath("images/logo/import.gif")))
         self.btnReadFile.Bind(wx.EVT_LEFT_DOWN,self.OnOpenFiles)
-
         # 在Panel上添加Button
-        self.btnOcr = wx.Button(self.panelTop, id=CST.BTN_OCR_IMG,label=u"识别", pos=(470, 0), size=(70, 30))
+        self.btnOcr = wx.Button(self.panelTop, id=CST.BTN_OCR_TRAIN, label=u"训练", pos=(470, 0), size=(70, 30))
+        self.btnOcr.SetDefault()
+        # 在Panel上添加Button
+        self.btnOcr = wx.Button(self.panelTop, id=CST.BTN_OCR_IMG,label=u"识别", pos=(540, 0), size=(70, 30))
         self.btnOcr.SetDefault()
         self.btnOcr.SetBitmap(bitmap=wx.Bitmap(URL.getResPath("images/logo/identify.gif")))
         self.btnOcr.Bind(wx.EVT_LEFT_DOWN, self.OnOpenFile)
 
-
         # 在Panel上添加Button
-        self.btnExport = wx.Button(self.panelTop, id=CST.BTN_EXPORT_EXCEL, label=u'导出Excel', pos=(540, 0), size=(70, 30))
+        self.btnExport = wx.Button(self.panelTop, id=CST.BTN_EXPORT_EXCEL, label=u'导出Excel', pos=(610, 0), size=(70, 30))
         self.btnExport.SetDefault()
         self.btnExport.SetBitmap(bitmap=wx.Bitmap(URL.getResPath("images/logo/excel.gif")))
         self.btnExport.Bind(wx.EVT_LEFT_DOWN, self.OnOpenFile)
