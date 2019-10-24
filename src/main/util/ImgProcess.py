@@ -12,7 +12,7 @@ def imgProcess(srcImg):
     #腐蚀
     #imgbinary = cv2.erode(imgbinary, np.ones((2, 2), np.uint8), iterations=2)
     # 分开图像中的各个数字，并找出轮廓
-    image, contours, hier = cv2.findContours(imgbinary.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    contours, hier = cv2.findContours(imgbinary.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     # 通过轮廓来迭代，并且放弃完全包含在其他矩形中的矩形，只添加不包含在其他矩形中和不超过图像宽度的好的矩形
     rectList = []
     for c in contours:
@@ -27,7 +27,7 @@ def imgProcess(srcImg):
         if not is_inside:
             if not a == b:
                 rectList.append(r)
-    return (img,imgbinary,rectList)
+    return img,imgbinary,rectList
 
 
 
@@ -44,7 +44,7 @@ def imgPredicted(srcimg,processimg,rectList,model):
         except:
             continue
         cv2.putText(resultImg, "%d" % digit_value, (int(x), int(y - 1)), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0))
-    return (srcimg,resultImg,resultList)
+    return srcimg,resultImg,resultList
 
 
 def imgSklearnPredicted(srcimg,processimg,rectList,model):
