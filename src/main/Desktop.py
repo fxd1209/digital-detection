@@ -98,7 +98,10 @@ class MainWin(wx.Frame):
                        [(255,63,30),(245,247,251),(255,63,30),(240,255,255),(255,63,30),(240,255,255),(255,63,30),(255,63,30)],   # skin1
                        [(196,147,239),(245,247,251),(196,147,239),(245,246,248),(196,147,239),(245,246,248),(196,147,239),(196,147,239)],   # skin2
                        [(234,187,19),(245,247,251),(234,187,19),(245,246,248),(234,187,19),(245,246,248),(234,187,19),(234,187,19)],   # skin3
-                       [(244,206,205),(245,247,251),(244,206,205),(245,246,248),(244,206,205),(245,246,248),(244,206,205),(244,206,205)]    # skin4
+                       [(244,206,205),(245,247,251),(244,206,205),(245,246,248),(244,206,205),(245,246,248),(244,206,205),(244,206,205)],    # skin4
+                       [(92,34,35),(245,247,251),(92,34,35),(245,246,248),(92,34,35),(245,246,248),(92,34,35),(92,34,35)],
+                       [(236,118,150),(245,247,251),(236,118,150),(245,246,248),(236,118,150),(245,246,248),(236,118,150),(236,118,150)],
+                       [(77,64,48),(245,247,251),(77,64,48),(245,246,248),(77,64,48),(245,246,248),(77,64,48),(77,64,48)]
                        ]
 
 
@@ -209,6 +212,12 @@ class MainWin(wx.Frame):
         self.createAndBindSkinMenuItem(self.menuBar, self.menu_skin, CST.MENU_SKIN_ITME_THREE, "金色稻田", "", wx.EVT_MENU,
                                        self.OnChangeSkin)
         self.createAndBindSkinMenuItem(self.menuBar, self.menu_skin, CST.MENU_SKIN_ITME_FOUR, "粉红女郎", "", wx.EVT_MENU,
+                                       self.OnChangeSkin)
+        self.createAndBindSkinMenuItem(self.menuBar, self.menu_skin, CST.MENU_SKIN_ITME_FIVE, "暗玉紫", "", wx.EVT_MENU,
+                                       self.OnChangeSkin)
+        self.createAndBindSkinMenuItem(self.menuBar, self.menu_skin, CST.MENU_SKIN_ITME_SIX, "淡绛红", "", wx.EVT_MENU,
+                                       self.OnChangeSkin)
+        self.createAndBindSkinMenuItem(self.menuBar, self.menu_skin, CST.MENU_SKIN_ITME_SEVEN, "淡松烟", "", wx.EVT_MENU,
                                        self.OnChangeSkin)
 
         self.menuBar.Append(self.menu_file, '&文件')
@@ -370,6 +379,12 @@ class MainWin(wx.Frame):
             self.setSkin(self.skinList, 2)
         elif id==CST.MENU_SKIN_ITME_FOUR:
             self.setSkin(self.skinList, 3)
+        elif id==CST.MENU_SKIN_ITME_FIVE:
+            self.setSkin(self.skinList, 4)
+        elif id==CST.MENU_SKIN_ITME_SIX:
+            self.setSkin(self.skinList, 5)
+        elif id==CST.MENU_SKIN_ITME_SEVEN:
+            self.setSkin(self.skinList, 6)
 
 
 
