@@ -1,2 +1,2 @@
-setuptools==39.0.1
+setuptools==65.5.1
 wxPython==4.0.6
